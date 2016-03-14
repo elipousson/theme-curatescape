@@ -33,6 +33,9 @@ echo head( array( 'maptype'=>'tour','title' => ''.$label.' | '.$tourTitle, 'cont
 		   <div id="tour-description">
 		    <?php echo nls2p( tour( 'Description' ) ); ?>
 		   </div>
+		   <div id="tour-postscript">
+		    <?php echo htmlspecialchars_decode(metadata('tour','Postscript Text')); ?>
+		   </div>
 		</section>
 		   
 		<section id="tour-items">
@@ -40,7 +43,10 @@ echo head( array( 'maptype'=>'tour','title' => ''.$label.' | '.$tourTitle, 'cont
 	         <?php 
 	         $i=1;
 	         foreach( $tour->getItems() as $tourItem ): 
-	        	 set_current_record( 'item', $tourItem );
+	        	if($tourItem->public){
+		        	
+	        	
+	        	set_current_record( 'item', $tourItem );
 	         	$itemID=$tourItem->id;
 	         	$hasImage=metadata($tourItem,'has thumbnail');
 	         ?>
@@ -62,6 +68,8 @@ echo head( array( 'maptype'=>'tour','title' => ''.$label.' | '.$tourTitle, 'cont
 	         <?php 
 	         $i++;
 	         $item_image=null;
+	         
+	         }
 	         endforeach; ?>
 		</section>
 				<div class="comments">
