@@ -25,7 +25,7 @@ echo head( array('maptype'=>'none', 'title' => $label, 'bodyid'=>'tours',
 		foreach( $tours as $tour ){ 
 		set_current_record( 'tour', $tour );
 		
-			$tourdesc = nls2p( tour( 'description' ) );
+			$tourdesc = strip_tags( htmlspecialchars_decode(tour( 'description' )) );
 		
 			echo '<article id="item-result-'.$i.'" class="item-result has-image">';
 			echo '<h3>'.link_to_tour(null,array('class'=>'permalink')).'</h3>';
@@ -34,7 +34,7 @@ echo head( array('maptype'=>'none', 'title' => $label, 'bodyid'=>'tours',
 			if(tour( 'Credits' )){
 				echo __('%1s curated by: %2s', mh_tour_label_option('singular'),tour( 'Credits' )).' | ';
 			}elseif(get_theme_option('show_author') == true){
-				echo __('%1s curated by: The %2s Team',mh_tour_label_option('singular'),option('site_title'));
+				echo __('%1s curated by: The %2s Team',mh_tour_label_option('singular'),option('site_title')).' | ';
 			}		
 			echo count($tour->Items).' '.__('Locations').'</span>';
 

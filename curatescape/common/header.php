@@ -65,12 +65,18 @@ if ($uploaded_stylesheet=get_theme_option('custom stylesheet')){
 }
 ?>
 
-<!-- JavaScripts -->
-<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true"></script>
+<!-- jQuery -->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-<?php
-queue_js_file('libraries.min'); // <-- Modernizr, jQuery UI Maps, Swipe.js, iSOnScreen, LoadJS, LoadCSS
+<!-- Leaflet -->
+<?php echo js_tag('leaflet','javascripts/leaflet');?>
+<link rel="stylesheet" href="<?php echo css_src('leaflet','javascripts/leaflet');?>" />
+<?php if(get_theme_option('clustering')):?>
+	<!-- Clustering -->
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+<?php endif;
+queue_js_file('libraries.min'); // <-- Modernizr, MakiMarker, Swipe.js, iSOnScreen, LoadJS, LoadCSS
 queue_js_file('check-width');
 echo head_js(false); // <-- No to Omeka default scripts
 // Fancybox, VideoJS (CDN) and AudioJS are loaded asyncronously as needed
